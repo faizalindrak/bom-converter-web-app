@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { parseBOMFile } from '../utils/bomParser';
 import { convertToMultiLevelBOM } from '../utils/bomConverter';
 import { generateXLSX } from '../utils/xlsxGenerator';
+import { saveBOMToIndexedDB } from '../utils/indexedDB';
 
 const FileUpload = ({ onFileProcessed }) => {
   const [isDragging, setIsDragging] = useState(false);
@@ -13,7 +14,7 @@ const FileUpload = ({ onFileProcessed }) => {
 
     const validTypes = ['.csv', '.xlsx'];
     const fileExtension = file.name.toLowerCase().substring(file.name.lastIndexOf('.'));
-    
+
     if (!validTypes.includes(fileExtension)) {
       setError('Please upload a CSV or XLSX file');
       return;
@@ -25,9 +26,15 @@ const FileUpload = ({ onFileProcessed }) => {
     try {
       const parsedData = await parseBOMFile(file);
       const multiLevelBOM = convertToMultiLevelBOM(parsedData);
+
+      // Save converted data to IndexedDB for viewing (supports large datasets)
+      const originalFilename = file.name.replace(/\.[^/.]+$/, '');
+      await saveBOMToIndexedDB(multiLevelBOM, originalFilename);
+
+      // Generate XLSX for download
       const xlsxBlob = generateXLSX(multiLevelBOM);
-      
-      onFileProcessed(xlsxBlob, file.name.replace(/\.[^/.]+$/, '') + '_multi_level.xlsx');
+
+      onFileProcessed(xlsxBlob, originalFilename + '_multi_level.xlsx', multiLevelBOM);
     } catch (err) {
       setError(err.message || 'Failed to process file');
     } finally {
@@ -65,11 +72,10 @@ const FileUpload = ({ onFileProcessed }) => {
       onDragLeave={handleDragLeave}
     >
       <label
-        className={`group flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl cursor-pointer transition-all duration-300 ${
-          isDragging 
-            ? 'border-indigo-500 bg-indigo-50/50' 
-            : 'border-gray-200 bg-gray-50/50 hover:bg-white hover:border-indigo-400 hover:shadow-sm'
-        } ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
+        className={`group flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl cursor-pointer transition-all duration-300 ${isDragging
+          ? 'border-indigo-500 bg-indigo-50/50'
+          : 'border-gray-200 bg-gray-50/50 hover:bg-white hover:border-indigo-400 hover:shadow-sm'
+          } ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
         <div className="flex flex-col items-center justify-center pt-5 pb-6">
           <div className={`p-4 rounded-full mb-4 transition-colors duration-300 ${isDragging ? 'bg-indigo-100' : 'bg-white group-hover:bg-indigo-50'}`}>
@@ -110,7 +116,7 @@ const FileUpload = ({ onFileProcessed }) => {
           disabled={isProcessing}
         />
       </label>
-      
+
       {error && (
         <div className="mt-4 p-4 bg-red-50 border border-red-100 rounded-lg flex items-start">
           <svg className="w-5 h-5 text-red-500 mr-2 flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

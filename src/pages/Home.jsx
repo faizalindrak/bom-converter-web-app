@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import FileUpload from '../components/FileUpload';
 import { downloadFile } from '../utils/xlsxGenerator';
 import registerServiceWorker from '../serviceWorkerRegistration';
@@ -7,14 +8,16 @@ const Home = () => {
   const [isDownloadReady, setIsDownloadReady] = useState(false);
   const [downloadBlob, setDownloadBlob] = useState(null);
   const [downloadFilename, setDownloadFilename] = useState('');
+  const [bomData, setBomData] = useState(null);
 
   React.useEffect(() => {
     registerServiceWorker();
   }, []);
 
-  const handleFileProcessed = (blob, filename) => {
+  const handleFileProcessed = (blob, filename, multiLevelBOM) => {
     setDownloadBlob(blob);
     setDownloadFilename(filename);
+    setBomData(multiLevelBOM);
     setIsDownloadReady(true);
   };
 
@@ -60,29 +63,60 @@ const Home = () => {
               <h3 className="text-xl font-semibold text-gray-900 mb-2">
                 Conversion Successful
               </h3>
-              <p className="text-gray-500 mb-8">
-                Your processed file is ready for download.
+              <p className="text-gray-500 mb-6">
+                Your BOM has been converted with {bomData?.rows?.length?.toLocaleString() || 0} rows.
               </p>
-              <button
-                onClick={handleDownload}
-                className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                <svg
-                  className="w-5 h-5 mr-2 -ml-1"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                  xmlns="http://www.w3.org/2000/svg"
+
+              {/* Action Buttons */}
+              <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <button
+                  onClick={handleDownload}
+                  className="inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full sm:w-auto"
                 >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
-                  />
-                </svg>
-                Download Converted File
-              </button>
+                  <svg
+                    className="w-5 h-5 mr-2 -ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
+                  </svg>
+                  Download XLSX
+                </button>
+
+                <Link
+                  to="/viewer"
+                  className="inline-flex items-center justify-center px-6 py-3 border-2 border-indigo-600 text-base font-medium rounded-lg text-indigo-600 bg-white hover:bg-indigo-50 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 w-full sm:w-auto"
+                >
+                  <svg
+                    className="w-5 h-5 mr-2 -ml-1"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"
+                    />
+                  </svg>
+                  View in Browser
+                </Link>
+              </div>
             </div>
           </div>
         )}
