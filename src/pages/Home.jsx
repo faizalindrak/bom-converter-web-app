@@ -31,40 +31,44 @@ const Home = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 py-12 px-4">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">
+    <div className="min-h-screen bg-gray-50 py-16 px-4 sm:px-6 lg:px-8 font-sans">
+      <div className="max-w-3xl mx-auto">
+        <div className="text-center mb-16">
+          <h1 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-4 sm:text-5xl">
             BOM Multi-Level Converter
           </h1>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-            Convert single-level Bill of Materials to multi-level structure with hierarchical relationships <br/>
-            and cumulative quantity calculations. Supports CSV and XLSX files.
+          <p className="text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed">
+            Transform single-level Bill of Materials into a structured multi-level hierarchy with automatic quantity calculations.
           </p>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
-          <h2 className="text-2xl font-semibold text-gray-800 mb-6 text-center">
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-8 mb-8 transition-shadow hover:shadow-md duration-300">
+          <h2 className="text-xl font-semibold text-gray-900 mb-6 text-center">
             Upload Your BOM File
           </h2>
           <FileUpload onFileProcessed={handleFileProcessed} />
         </div>
 
         {isDownloadReady && (
-          <div className="bg-white rounded-2xl shadow-xl p-8">
-            <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
-              Conversion Complete!
-            </h3>
-            <p className="text-gray-600 text-center mb-6">
-              Your multi-level BOM file is ready for download
-            </p>
+          <div className="bg-white rounded-xl shadow-sm border border-green-100 p-8 mb-8 ring-1 ring-green-500/10">
             <div className="text-center">
+              <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-green-100 mb-4">
+                <svg className="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                </svg>
+              </div>
+              <h3 className="text-xl font-semibold text-gray-900 mb-2">
+                Conversion Successful
+              </h3>
+              <p className="text-gray-500 mb-8">
+                Your processed file is ready for download.
+              </p>
               <button
                 onClick={handleDownload}
-                className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+                className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
               >
                 <svg
-                  className="w-5 h-5 inline-block mr-2"
+                  className="w-5 h-5 mr-2 -ml-1"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -74,36 +78,58 @@ const Home = () => {
                     strokeLinecap="round"
                     strokeLinejoin="round"
                     strokeWidth={2}
-                    d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                    d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
                   />
                 </svg>
-                Download Multi-Level BOM
+                Download Converted File
               </button>
             </div>
           </div>
         )}
 
-        <div className="mt-12 bg-white rounded-2xl shadow-xl p-8">
-          <h3 className="text-xl font-semibold text-gray-800 mb-4">
-            How to Use
+        <div className="mt-16 border-t border-gray-200 pt-12">
+          <h3 className="text-lg font-semibold text-gray-900 mb-8 text-center">
+            Features & Guidelines
           </h3>
-          <div className="grid md:grid-cols-2 gap-6">
-            <div className="space-y-4">
-              <h4 className="font-semibold text-gray-700">Input Requirements:</h4>
-              <ul className="list-disc list-inside space-y-2 text-gray-600">
-                <li>CSV or XLSX file formats</li>
-                <li>Must contain "SKU (SFG/FG)" header column</li>
-                <li>Parent-child relationships defined in columns</li>
-                <li>Quantity information in numeric columns</li>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
+              <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mr-3 text-sm font-bold">1</span>
+                Input Requirements
+              </h4>
+              <ul className="space-y-3 text-gray-600 text-sm">
+                <li className="flex items-start">
+                  <svg className="w-4 h-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  CSV or XLSX file formats
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-4 h-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  "SKU (SFG/FG)" header required
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-4 h-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+                  Defined parent-child columns
+                </li>
               </ul>
             </div>
-            <div className="space-y-4">
-              <h4 className="font-semibold text-gray-700">Output Features:</h4>
-              <ul className="list-disc list-inside space-y-2 text-gray-600">
-                <li>Hierarchical BOM structure with levels</li>
-                <li>Cumulative quantity calculations</li>
-                <li>Prevents infinite loops</li>
-                <li>XLSX format output</li>
+            <div className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
+              <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
+                <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mr-3 text-sm font-bold">2</span>
+                Output Features
+              </h4>
+              <ul className="space-y-3 text-gray-600 text-sm">
+                <li className="flex items-start">
+                  <svg className="w-4 h-4 text-purple-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  Hierarchical structure analysis
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-4 h-4 text-purple-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  Smart cumulative calculations
+                </li>
+                <li className="flex items-start">
+                  <svg className="w-4 h-4 text-purple-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
+                  Infinite loop detection
+                </li>
               </ul>
             </div>
           </div>
