@@ -290,7 +290,7 @@ const Home = () => {
                 <div>
                   <h4 className="text-xl font-bold mb-2">Quick Start Guide</h4>
                   <p className="text-white/80 text-sm">
-                    Just upload your BOM file with "SKU (SFG/FG)" header. We'll handle the rest!
+                    Upload any BOM file — we'll auto-detect your columns or let you select manually!
                   </p>
                 </div>
                 <div className="flex items-center gap-4 flex-wrap justify-center">
@@ -352,13 +352,13 @@ const Home = () => {
               {/* FAQ Item 3 */}
               <details className="bg-white rounded-lg border border-gray-100 shadow-sm group">
                 <summary className="flex items-center justify-between p-5 cursor-pointer list-none">
-                  <span className="font-medium text-gray-900">What does "SKU (SFG/FG)" header mean?</span>
+                  <span className="font-medium text-gray-900">What column formats are supported?</span>
                   <svg className="w-5 h-5 text-gray-500 group-open:rotate-180 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
                   </svg>
                 </summary>
                 <div className="px-5 pb-5 text-gray-600 text-sm leading-relaxed border-t border-gray-100 pt-4">
-                  This column header identifies the parent SKU in your BOM structure. <strong>SFG</strong> stands for Semi-Finished Goods and <strong>FG</strong> stands for Finished Goods. The tool uses this column to identify parent-child relationships and build the multi-level hierarchy.
+                  The tool uses <strong>smart detection</strong> to automatically identify your parent SKU column. It recognizes common formats like "SKU", "Part Number", "Item Code", "Material", "Product ID", and many more. If auto-detection fails, you'll be prompted to manually select the correct column from your data.
                 </div>
               </details>
 
