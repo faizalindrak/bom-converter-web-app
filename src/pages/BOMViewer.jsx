@@ -1,8 +1,9 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { AgGridReact } from 'ag-grid-react';
 import { AllCommunityModule, ModuleRegistry, themeQuartz } from 'ag-grid-community';
 import { getLatestBOMFromIndexedDB, getAllBOMFromIndexedDB, getBOMByIdFromIndexedDB, deleteBOMFromIndexedDB } from '../utils/indexedDB';
+import { generateXLSX, downloadFile } from '../utils/xlsxGenerator';
 
 // Register AG Grid modules
 ModuleRegistry.registerModules([AllCommunityModule]);
@@ -34,6 +35,19 @@ const BOMViewer = () => {
     const [searchText, setSearchText] = useState('');
     const [gridApi, setGridApi] = useState(null);
     const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
+    const [exportDropdownOpen, setExportDropdownOpen] = useState(false);
+    const exportDropdownRef = useRef(null);
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (exportDropdownRef.current && !exportDropdownRef.current.contains(event.target)) {
+                setExportDropdownOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     // Load BOM data from IndexedDB
     useEffect(() => {
@@ -160,6 +174,17 @@ const BOMViewer = () => {
                 fileName: `${bomData?.filename || 'bom_export'}_${new Date().toISOString().split('T')[0]}.csv`
             });
         }
+        setExportDropdownOpen(false);
+    };
+
+    // Export to XLSX
+    const handleExportXLSX = () => {
+        if (bomData) {
+            const xlsxBlob = generateXLSX(bomData);
+            const filename = `${bomData.filename || 'bom_export'}_${new Date().toISOString().split('T')[0]}.xlsx`;
+            downloadFile(xlsxBlob, filename);
+        }
+        setExportDropdownOpen(false);
     };
 
     // Format date
@@ -229,16 +254,45 @@ const BOMViewer = () => {
                                     </svg>
                                 </div>
 
-                                {/* Export Button */}
-                                <button
-                                    onClick={handleExportCSV}
-                                    className="inline-flex items-center px-4 py-2 bg-[oklch(12.9%_0.042_264.695)] text-white text-sm font-medium rounded-lg hover:bg-[oklch(18%_0.042_264.695)] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[oklch(12.9%_0.042_264.695)]"
-                                >
-                                    <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
-                                    Export CSV
-                                </button>
+                                {/* Export Dropdown Button */}
+                                <div className="relative" ref={exportDropdownRef}>
+                                    <button
+                                        onClick={() => setExportDropdownOpen(!exportDropdownOpen)}
+                                        className="inline-flex items-center px-4 py-2 bg-[oklch(12.9%_0.042_264.695)] text-white text-sm font-medium rounded-lg hover:bg-[oklch(18%_0.042_264.695)] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[oklch(12.9%_0.042_264.695)]"
+                                    >
+                                        <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                        </svg>
+                                        Export
+                                        <svg className={`w-4 h-4 ml-2 transition-transform ${exportDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+
+                                    {/* Dropdown Menu */}
+                                    {exportDropdownOpen && (
+                                        <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-1 z-50">
+                                            <button
+                                                onClick={handleExportXLSX}
+                                                className="w-full flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                                            >
+                                                <svg className="w-4 h-4 mr-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Save as XLSX
+                                            </button>
+                                            <button
+                                                onClick={handleExportCSV}
+                                                className="w-full flex items-center px-4 py-2.5 text-sm text-gray-700 hover:bg-gray-50 transition-colors"
+                                            >
+                                                <svg className="w-4 h-4 mr-3 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                </svg>
+                                                Save as CSV
+                                            </button>
+                                        </div>
+                                    )}
+                                </div>
                             </div>
                         )}
                     </div>
