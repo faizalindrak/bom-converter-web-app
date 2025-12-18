@@ -189,50 +189,129 @@ const Home = () => {
           </div>
         )}
 
-        <div className="mt-16 border-t border-gray-200 pt-12">
-          <h3 className="text-lg font-semibold text-gray-900 mb-8 text-center">
-            Features & Guidelines
-          </h3>
-          <div className="grid md:grid-cols-2 gap-8">
-            <div className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
-              <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-blue-100 text-blue-600 mr-3 text-sm font-bold">1</span>
-                Input Requirements
-              </h4>
-              <ul className="space-y-3 text-gray-600 text-sm">
-                <li className="flex items-start">
-                  <svg className="w-4 h-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  CSV or XLSX file formats
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-4 h-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  "SKU (SFG/FG)" header required
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-4 h-4 text-blue-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
-                  Defined parent-child columns
-                </li>
-              </ul>
+        {/* Features Section */}
+        <div className="mt-20 pt-16 border-t border-gray-200">
+          <div className="text-center mb-12">
+            <span className="inline-block px-4 py-1.5 bg-[oklch(95%_0.01_264.695)] text-[oklch(12.9%_0.042_264.695)] text-sm font-medium rounded-full mb-4">
+              Powerful Features
+            </span>
+            <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              Everything You Need for BOM Conversion
+            </h3>
+            <p className="text-gray-500 max-w-xl mx-auto">
+              Transform your single-level BOMs into structured multi-level hierarchies with our powerful client-side processor.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {/* Feature 1 - Security */}
+            <div className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-green-200 transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-green-400 to-emerald-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
+                </svg>
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2 text-lg">100% Client-Side</h4>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Your data never leaves your browser. All processing happens locally, ensuring complete privacy and security.
+              </p>
             </div>
-            <div className="bg-white rounded-lg p-6 border border-gray-100 shadow-sm">
-              <h4 className="font-semibold text-gray-900 mb-4 flex items-center">
-                <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center rounded-full bg-purple-100 text-purple-600 mr-3 text-sm font-bold">2</span>
-                Output Features
-              </h4>
-              <ul className="space-y-3 text-gray-600 text-sm">
-                <li className="flex items-start">
-                  <svg className="w-4 h-4 text-purple-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                  Hierarchical structure analysis
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-4 h-4 text-purple-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                  Smart cumulative calculations
-                </li>
-                <li className="flex items-start">
-                  <svg className="w-4 h-4 text-purple-500 mt-1 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg>
-                  Infinite loop detection
-                </li>
-              </ul>
+
+            {/* Feature 2 - File Formats */}
+            <div className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-blue-200 transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-blue-400 to-cyan-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                </svg>
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2 text-lg">Multiple Formats</h4>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Import CSV or XLSX files and export your converted BOM in either format with auto-sized columns.
+              </p>
+            </div>
+
+            {/* Feature 3 - Multi-Level */}
+            <div className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-purple-200 transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-400 to-violet-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                </svg>
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2 text-lg">Multi-Level Hierarchy</h4>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Automatically builds hierarchical structure from flat BOM data with clear level indicators.
+              </p>
+            </div>
+
+            {/* Feature 4 - Cumulative Quantities */}
+            <div className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-orange-200 transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-orange-400 to-amber-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2 text-lg">Smart Calculations</h4>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Automatically calculates cumulative quantities by multiplying through the hierarchy chain.
+              </p>
+            </div>
+
+            {/* Feature 5 - Loop Detection */}
+            <div className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-red-200 transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-rose-400 to-pink-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2 text-lg">Loop Detection</h4>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                Intelligent circular reference detection prevents infinite loops in your BOM structure.
+              </p>
+            </div>
+
+            {/* Feature 6 - Browser Viewer */}
+            <div className="group bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl hover:border-teal-200 transition-all duration-300 hover:-translate-y-1">
+              <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-teal-400 to-cyan-500 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2 text-lg">Interactive Viewer</h4>
+              <p className="text-gray-500 text-sm leading-relaxed">
+                View, search, filter, and sort your converted BOM directly in the browser with AG Grid.
+              </p>
+            </div>
+          </div>
+
+          {/* Quick Start Guide */}
+          <div className="mt-12 bg-gradient-to-r from-[oklch(12.9%_0.042_264.695)] to-[oklch(18%_0.06_264.695)] rounded-2xl p-8 text-white">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div>
+                <h4 className="text-xl font-bold mb-2">Quick Start Guide</h4>
+                <p className="text-white/80 text-sm">
+                  Just upload your BOM file with "SKU (SFG/FG)" header. We'll handle the rest!
+                </p>
+              </div>
+              <div className="flex items-center gap-4 flex-wrap justify-center">
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">1</span>
+                  <span className="text-sm">Upload File</span>
+                </div>
+                <svg className="w-4 h-4 text-white/50 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">2</span>
+                  <span className="text-sm">Auto Convert</span>
+                </div>
+                <svg className="w-4 h-4 text-white/50 hidden sm:block" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+                <div className="flex items-center gap-2 bg-white/10 backdrop-blur-sm px-4 py-2 rounded-lg">
+                  <span className="w-6 h-6 rounded-full bg-white/20 flex items-center justify-center text-xs font-bold">3</span>
+                  <span className="text-sm">Download</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
