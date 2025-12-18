@@ -9,13 +9,13 @@ ModuleRegistry.registerModules([AllCommunityModule]);
 
 // Custom theme based on Quartz
 const customTheme = themeQuartz.withParams({
-    accentColor: '#6366f1',
+    accentColor: 'oklch(12.9% 0.042 264.695)',
     backgroundColor: '#ffffff',
     foregroundColor: '#1f2937',
     headerBackgroundColor: '#f8fafc',
     headerTextColor: '#374151',
     rowHoverColor: '#f1f5f9',
-    selectedRowBackgroundColor: '#eef2ff',
+    selectedRowBackgroundColor: 'oklch(95% 0.01 264.695)',
     borderColor: '#e5e7eb',
     fontFamily: 'Inter, system-ui, sans-serif',
     fontSize: 13,
@@ -84,7 +84,7 @@ const BOMViewer = () => {
                 cellRenderer: isLevelColumn ? (params) => {
                     const level = parseInt(params.value) || 0;
                     const colors = [
-                        'bg-indigo-100 text-indigo-700',
+                        'bg-[oklch(90%_0.03_264.695)] text-[oklch(20%_0.042_264.695)]',
                         'bg-purple-100 text-purple-700',
                         'bg-blue-100 text-blue-700',
                         'bg-cyan-100 text-cyan-700',
@@ -176,7 +176,7 @@ const BOMViewer = () => {
     if (isLoading) {
         return (
             <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[oklch(12.9%_0.042_264.695)]"></div>
             </div>
         );
     }
@@ -190,7 +190,7 @@ const BOMViewer = () => {
                         <div className="flex items-center space-x-4">
                             <Link
                                 to="/"
-                                className="inline-flex items-center text-gray-500 hover:text-indigo-600 transition-colors"
+                                className="inline-flex items-center text-gray-500 hover:text-[oklch(12.9%_0.042_264.695)] transition-colors"
                             >
                                 <svg className="w-5 h-5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 19l-7-7m0 0l7-7m-7 7h18" />
@@ -222,7 +222,7 @@ const BOMViewer = () => {
                                         placeholder="Quick search..."
                                         value={searchText}
                                         onChange={(e) => setSearchText(e.target.value)}
-                                        className="w-72 pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-shadow"
+                                        className="w-72 pl-10 pr-4 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-[oklch(12.9%_0.042_264.695)] focus:border-transparent transition-shadow"
                                     />
                                     <svg className="absolute left-3 top-2.5 w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
@@ -232,7 +232,7 @@ const BOMViewer = () => {
                                 {/* Export Button */}
                                 <button
                                     onClick={handleExportCSV}
-                                    className="inline-flex items-center px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+                                    className="inline-flex items-center px-4 py-2 bg-[oklch(12.9%_0.042_264.695)] text-white text-sm font-medium rounded-lg hover:bg-[oklch(18%_0.042_264.695)] transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[oklch(12.9%_0.042_264.695)]"
                                 >
                                     <svg className="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -259,7 +259,7 @@ const BOMViewer = () => {
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                                 No history yet.
-                                <Link to="/" className="block mt-2 text-indigo-600 hover:text-indigo-700 font-medium text-xs">
+                                <Link to="/" className="block mt-2 text-[oklch(12.9%_0.042_264.695)] hover:text-[oklch(18%_0.042_264.695)] font-medium text-xs">
                                     Convert a file →
                                 </Link>
                             </div>
@@ -269,13 +269,13 @@ const BOMViewer = () => {
                                     <div
                                         key={item.id}
                                         className={`p-3 transition-colors group ${selectedHistoryId === item.id
-                                            ? 'bg-indigo-50 border-l-2 border-indigo-500'
+                                            ? 'bg-[oklch(95%_0.01_264.695)] border-l-2 border-[oklch(12.9%_0.042_264.695)]'
                                             : 'hover:bg-gray-50 border-l-2 border-transparent'
                                             }`}
                                     >
                                         <div className="flex items-start justify-between">
                                             <div className="min-w-0 flex-1">
-                                                <p className={`text-sm font-medium truncate ${selectedHistoryId === item.id ? 'text-indigo-700' : 'text-gray-900'
+                                                <p className={`text-sm font-medium truncate ${selectedHistoryId === item.id ? 'text-[oklch(12.9%_0.042_264.695)]' : 'text-gray-900'
                                                     }`}>
                                                     {item.filename}
                                                 </p>
@@ -315,7 +315,7 @@ const BOMViewer = () => {
                             <p className="text-gray-500 mb-6">Convert a BOM file to view it here.</p>
                             <Link
                                 to="/"
-                                className="inline-flex items-center px-6 py-3 bg-indigo-600 text-white font-medium rounded-lg hover:bg-indigo-700 transition-colors"
+                                className="inline-flex items-center px-6 py-3 bg-[oklch(12.9%_0.042_264.695)] text-white font-medium rounded-lg hover:bg-[oklch(18%_0.042_264.695)] transition-colors"
                             >
                                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />

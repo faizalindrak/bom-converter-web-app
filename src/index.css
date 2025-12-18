@@ -1,5 +1,13 @@
 @import "tailwindcss";
 
+:root {
+  --primary: oklch(12.9% 0.042 264.695);
+  --primary-light: oklch(18% 0.042 264.695);
+  --primary-lighter: oklch(25% 0.042 264.695);
+  --primary-bg: oklch(95% 0.01 264.695);
+  --primary-bg-light: oklch(97% 0.005 264.695);
+}
+
 body {
   margin: 0;
   min-width: 320px;

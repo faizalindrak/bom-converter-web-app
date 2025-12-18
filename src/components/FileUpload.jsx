@@ -73,14 +73,14 @@ const FileUpload = ({ onFileProcessed }) => {
     >
       <label
         className={`group flex flex-col items-center justify-center w-full h-64 border-2 border-dashed rounded-xl cursor-pointer transition-all duration-300 ${isDragging
-          ? 'border-indigo-500 bg-indigo-50/50'
-          : 'border-gray-200 bg-gray-50/50 hover:bg-white hover:border-indigo-400 hover:shadow-sm'
+          ? 'border-[oklch(12.9%_0.042_264.695)] bg-[oklch(95%_0.01_264.695)]'
+          : 'border-gray-200 bg-gray-50/50 hover:bg-white hover:border-[oklch(25%_0.042_264.695)] hover:shadow-sm'
           } ${isProcessing ? 'opacity-50 cursor-not-allowed' : ''}`}
       >
         <div className="flex flex-col items-center justify-center pt-5 pb-6">
-          <div className={`p-4 rounded-full mb-4 transition-colors duration-300 ${isDragging ? 'bg-indigo-100' : 'bg-white group-hover:bg-indigo-50'}`}>
+          <div className={`p-4 rounded-full mb-4 transition-colors duration-300 ${isDragging ? 'bg-[oklch(90%_0.03_264.695)]' : 'bg-white group-hover:bg-[oklch(95%_0.01_264.695)]'}`}>
             <svg
-              className={`w-10 h-10 transition-colors duration-300 ${isDragging ? 'text-indigo-600' : 'text-gray-400 group-hover:text-indigo-500'}`}
+              className={`w-10 h-10 transition-colors duration-300 ${isDragging ? 'text-[oklch(12.9%_0.042_264.695)]' : 'text-gray-400 group-hover:text-[oklch(18%_0.042_264.695)]'}`}
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -95,12 +95,12 @@ const FileUpload = ({ onFileProcessed }) => {
             </svg>
           </div>
           <p className="mb-2 text-sm text-gray-600 font-medium">
-            <span className="text-indigo-600 font-semibold hover:text-indigo-700">Click to upload</span> or drag and drop
+            <span className="text-[oklch(12.9%_0.042_264.695)] font-semibold hover:text-[oklch(18%_0.042_264.695)]">Click to upload</span> or drag and drop
           </p>
           <p className="text-xs text-gray-400">CSV or XLSX files only</p>
           {isProcessing && (
-            <div className="flex items-center mt-4 text-indigo-600">
-              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-indigo-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+            <div className="flex items-center mt-4 text-[oklch(12.9%_0.042_264.695)]">
+              <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-[oklch(12.9%_0.042_264.695)]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
               </svg>
