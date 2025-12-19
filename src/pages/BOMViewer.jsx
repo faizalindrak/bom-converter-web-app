@@ -86,7 +86,6 @@ const BOMViewer = () => {
             return {
                 field: `col_${index}`,
                 headerName: header || `Column ${index + 1}`,
-                flex: index === 0 ? 2 : 1,
                 minWidth: isLevelColumn ? 80 : 120,
                 maxWidth: isLevelColumn ? 100 : undefined,
                 filter: true,
@@ -404,10 +403,14 @@ const BOMViewer = () => {
                                         filter: true,
                                         resizable: true,
                                         minWidth: 100,
+                                        enableRowGroup: false,
                                     }}
+                                    autoSizeStrategy={{
+                                        type: 'fitCellContents',
+                                    }}
+                                    columnMenu="new"
                                     animateRows={true}
-                                    rowSelection="multiple"
-                                    suppressRowClickSelection={true}
+                                    rowSelection={{ mode: "multiRow", enableClickSelection: false }}
                                     pagination={true}
                                     paginationPageSize={100}
                                     paginationPageSizeSelector={[50, 100, 200, 500, 1000]}
@@ -417,6 +420,24 @@ const BOMViewer = () => {
                                     suppressColumnVirtualisation={false}
                                     rowBuffer={30}
                                     domLayout="normal"
+                                    sideBar={{
+                                        toolPanels: [
+                                            {
+                                                id: 'columns',
+                                                labelDefault: 'Columns',
+                                                labelKey: 'columns',
+                                                iconKey: 'columns',
+                                                toolPanel: 'agColumnsToolPanel',
+                                                toolPanelParams: {
+                                                    suppressRowGroups: true,
+                                                    suppressValues: true,
+                                                    suppressPivots: true,
+                                                    suppressPivotMode: true,
+                                                },
+                                            },
+                                        ],
+                                        defaultToolPanel: '',
+                                    }}
                                 />
                             </div>
                         </div>
