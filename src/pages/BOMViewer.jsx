@@ -8,7 +8,7 @@ import {
     getPaginationRowModel,
     flexRender,
 } from '@tanstack/react-table';
-import { getLatestBOMFromIndexedDB, getAllBOMFromIndexedDB, deleteBOMFromIndexedDB } from '../utils/indexedDB';
+import { getLatestBOMFromIndexedDB, getAllBOMFromIndexedDB, deleteBOMFromIndexedDB, getBOMByIdFromIndexedDB } from '../utils/indexedDB';
 import { generateXLSX, downloadFile } from '../utils/xlsxGenerator';
 
 // Filter modes
@@ -369,6 +369,24 @@ const BOMViewer = () => {
         }
     };
 
+    // Handle selecting a history item
+    const handleSelectHistory = async (id) => {
+        if (id === selectedHistoryId) return;
+        try {
+            const bomDataById = await getBOMByIdFromIndexedDB(id);
+            if (bomDataById) {
+                setBomData(bomDataById);
+                setSelectedHistoryId(id);
+                // Reset filters and sorting when switching BOM
+                setGlobalFilter('');
+                setColumnFilters([]);
+                setSorting([]);
+            }
+        } catch (error) {
+            console.error('Failed to load BOM data:', error);
+        }
+    };
+
     // Export to CSV
     const handleExportCSV = () => {
         if (!bomData) return;
@@ -583,7 +601,8 @@ const BOMViewer = () => {
                                 {history.map((item) => (
                                     <div
                                         key={item.id}
-                                        className={`p-3 transition-colors group ${selectedHistoryId === item.id
+                                        onClick={() => handleSelectHistory(item.id)}
+                                        className={`p-3 transition-colors group cursor-pointer ${selectedHistoryId === item.id
                                             ? 'bg-[oklch(95%_0.01_264.695)] border-l-2 border-[oklch(12.9%_0.042_264.695)]'
                                             : 'hover:bg-gray-50 border-l-2 border-transparent'
                                             }`}
